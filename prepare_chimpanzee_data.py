@@ -84,7 +84,7 @@ train_annotations = annotations[:int(len(annotations) * train_ratio)]
 gal_annotations = annotations[int(len(annotations) * train_ratio):int(len(annotations) * (train_ratio + gal_ratio))]
 probe_annotations = annotations[int(len(annotations) * (train_ratio + gal_ratio)):]
 
-
+Path('chimp_splits/fold_1/').mkdir(parents=True, exist_ok=True)
 write_fold(train_annotations, name2id, 'chimp_splits/train_1.txt')
 write_fold(gal_annotations, name2id, 'chimp_splits/fold_1/gal_1.txt')
 write_fold(probe_annotations, name2id, 'chimp_splits/fold_1/probe_1.txt')
