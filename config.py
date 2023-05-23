@@ -19,12 +19,14 @@ log_base_dir = './log/'
 summary_interval = 5
 
 # Dataset
+#
+# NOTE: THE AUTHOR LIED, THIS FIELD IS NOT USED, THE DATASET IS NOT PUBLISHED
 dataset_path = "LemurDataset"
 
 
 # Cross-validation Parameters
 K_CV = 5    # Number of cross-validation folds (training/testing splits)
-splits_path = './splits'
+splits_path = './chimp_splits'
 
 #Target image size for the input of network
 image_size = [112,112]

@@ -39,6 +39,8 @@ import h5py
 import facepy
 from sklearn.model_selection import KFold
 
+from PIL import Image
+
 def import_file(full_path_to_module, name='module.name'):
     if full_path_to_module is None:
         print('Configuration file not added as an argument')
@@ -432,6 +434,11 @@ def random_downsample(images, min_ratio):
     return images_new
 
 
+def resize_one_image(image: np.ndarray, size) -> np.ndarray:
+    pil_image = Image.fromarray(image)
+    pil_image = pil_image.resize(size)
+    return np.array(pil_image)
+
 def preprocess(images, config, is_training=False):
     # Load images first if they are file paths
     if type(images[0]) == str:
@@ -441,9 +448,15 @@ def preprocess(images, config, is_training=False):
         mode = 'RGB' if config.channels==3 else 'I'
         print('Reading images ...')
         for idx, image_path in enumerate(image_paths):
-                images.append(misc.imread(image_path, mode=mode))
+            # NOTE: THE CHIMPANZEE IMAGES ARE DIFFER IN SIZE
+            #       BUT THE CODE NEED ALL SAME SIZE TO WORK
+            image = resize_one_image(misc.imread(image_path, mode=mode), config.resize)
+            images.append(image)
         print('Done reading images ... ')
-            
+
+        images = np.array(images)
+        resize(images, (112, 112))
+
         images = np.stack(images, axis=0)
 
     # Process images
