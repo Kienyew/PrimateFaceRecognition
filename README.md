@@ -1,3 +1,12 @@
+# HOW TO RUN
+1. execute `python prepare_chimpanzee_data.py` to prepare annotation files of chimpanzee dataset
+2. Run `python train.py --config_file config.py`
+
+
+
+
+
+
 
 <!-- PROJECT LOGO -->
 <br />
